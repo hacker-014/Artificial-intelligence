@@ -1,0 +1,100 @@
+𝙐𝙨𝙚 𝘼𝙄 𝙩𝙤 𝙒𝙧𝙞𝙩𝙚 𝙀𝙨𝙨𝙖𝙮𝙨 𝙬𝙞𝙩𝙝 3 𝙇𝙞𝙣𝙚𝙨 𝙤𝙛 𝙋𝙮𝙩𝙝𝙤𝙣 𝘾𝙤𝙙𝙚
+
+𝘖pen AI created Generative Pre-trained Transformer 3 (GPT-3) and is currently the bleeding edge in working with and manipulating language. It can generate text nearly indistinguishable from that of a human.
+
+
+However, with these amazing capabilities, there are also dangers.
+
+AI-generated text could spread misinformation, perpetuating the blizzard of “fake news”.
+
+If it were used maliciously, it would cause unnecessary anger and confusion by developing incorrect beliefs.
+
+With its great potential but grave danger, OpenAI, the creator, has decided to release GPT-3 as a beta, only available to select individuals.
+
+The Juicy Part
+However, another organization, EleutherAI, created GPT-Neo. The GPT-Neo models were designed to replicate those developed by OpenAI in GPT-3. Although it is less powerful, the results are still amazing and you can use it to generate original text in 3 lines of code.
+
+I respect your time, so here is the code for anyone looking to just copy-paste:
+
+Imports
+To use transformers, we need to first install PyTorch. Go to pytorch.org and scroll down to Install PyTorch.
+
+There, you will find multiple options. For the build, pick the stable one. For the package, select pip. For the compute platform, pick CUDA 11.1 if you have an Nvidia GPU that supports CUDA. Otherwise, pick CPU.
+
+Below are the options I have chosen for my installation of PyTorch.
+
+
+The options I have chosen for my installation of PyTorch
+Copy the command at the bottom into the command prompt, and wait for it to finish.
+
+Next, we need to import and install transformers. To do that, run this command in your command prompt:
+
+pip install transformers
+It may take a while but should finish without error.
+
+Load Pre-Trained Model
+First, import pipeline from transformers:
+
+from transformers import pipeline
+Next, load in the model by running:
+
+generator = pipeline('text-generation', model='EleutherAI/gpt-neo-2.7B')
+The pipeline we are using is a text generation pipeline, but there are many other pipelines that accomplish different tasks.
+
+For the model, instead of using EleutherAI/gpt-neo-2.7B, you can replace the 2.7B with 1.3B or 125M, so it will run faster on your computer.
+
+
+Remember, these are big numbers, and your computer will get absolutely destroyed.
+
+My computer has 16 GB of memory, and I had to increase the virtual memory to 64 GB in order to use the 2.7B model without any errors.
+
+Virtual memory is used when your computer runs out of memory. It uses storage to temporarily hold what was in RAM. Although it allows you to run much larger programs, it is a snail compared to true RAM. If you do have to use virtual memory, whatever you are running will run severely slower.
+
+Increase Virtual Memory
+Here is how to increase the virtual memory to load in the largest models.
+
+Go to the Windows search
+Search Adjust the appearance and performance then click on the first result
+Click on the Advanced tab
+Under the virtual memory section, click Change
+Change the maximum size to 65536 (GB = 1024 ⋅ MB, so 65536 is 64 GB)
+Click on Set
+Click OK and close the windows
+Using the Model
+Finally, we are ready to use the model.
+
+prompt = 'The thing I hate most' # can be anything
+res = generator(prompt, max_length=50, do_sample=True, temperature=0.9)
+Use the generator created previously, and pass in a prompt and the maximum number of words. Keep do_sample as True because that is what they did in the example in the documentation, but I have no idea what it means.
+
+The longer you set the max length, the longer it will take for your code to run. The max length must also be greater than the number of words in the prompt. As a test, use a brief prompt and set max_length to 50.
+
+The temperature (0 to 1) controls the randomness of the text. If the temperature is 0, the same prompt will output the same result every single time. As the temperature increases, there will be more randomness and creativity. I set it to 0.9.
+
+Outputting Results
+res is a list of a single dictionary, where the result is stored under the key generated_text.
+
+print(res[0]['generated_text'])
+Here are some examples of outputs with the prompts The thing I hate most and The thing you hate most:
+
+The thing I hate most about politics is that while politicians constantly lie, they get no consequences. They can lie, but it makes no difference if people believe them or not. I have written about this
+The thing you hate most about being an atheist is the burden of proof with which you are confronted. To some extent, that burden can be avoided by simply believing what the Bible says. To some degree, one can use some of the arguments of apologists for the God that they insist exists. The problem is, many people won’t listen and some people will simply reject the arguments. The thing is, I think we can all understand the sense of burden of proof with which you are confronted
+The thing I hate most about being poor are the ones who complain about something not being a lot or not being an all or nothing thing. Like if you tell them that they can come here and get as much as they want if they’re willing to put in work and time but they don
+The thing I hate most about the game is that when the bad guys die the player simply gets a respawn. It just doesn’t make sense. When you get shot in the chest, you get a respawn point. When you get shot in the head, you get a respawn point. When you get killed by an archer, you get a respawn
+As you can see, there are grammatical mistakes in a few places, but there will be less if you decrease the temperature.
+
+For this prompt, I also noticed a common element throughout all of them. It always adds about after the prompt even though it was not a part of it.
+
+I also noticed that it always cuts off the result at the max length. It would be cool if it could end the response at the end of a sentence.
+
+Conclusion
+GPT-3 is a powerful tool, and with GPT-Neo, you can get a glimpse of its great potential. I encourage you to try out different parameters and different prompts. See if you can find patterns or errors in the AI-generated text.
+
+Due to its imperfections, I use GPT-Neo to generate ideas given a topic rather than directly copying what was generated. For me, it provides a good starting point to jump off of. What would you change if you were creating your own model?
+
+I hope that this article has allowed you to begin exploring the world of natural language processing. After playing around with GPT-Neo, you will understand why this bleeding-edge technology may be the next big thing.
+
+
+
+
+
